@@ -1,0 +1,36 @@
+{
+    "rounds": {
+        "round1": "Round 1",
+        "round2": "Round 2",
+        "round3": "Round 3",
+        "round4": "Round 4",
+        "round5": "Round 5"
+    },
+    "gameLogics": {
+        "": "Choose Word",
+        "SCRAMBLE WORD" : "SCRAMBLE WORD",
+        "TYPO WORD": "TYPO WORD",
+        "HIDDEN WORD": "HIDDEN WORD",
+        "CROSS WORD" : "CROSS WORD",
+        "WRONG WORD" : "WRONG WORD",
+        "OPPOSITE WORD" : "OPPOSITE WORD",
+        "VIDEO WORD" : "VIDEO WORD",
+        "ODD WORD" : "ODD WORD",
+        "MYSTERY WORD" : "MYSTERY WORD",
+        "LADDER WORD" : "LADDER WORD",
+        "COMMON WORD" : "COMMON WORD",
+        "MISSING WORD": "MISSING WORD",
+        "WORD COMBO": "WORD COMBO"
+
+    },
+    "labels": {
+        "typoWordQuestionLbl": "QUESTION",
+        "typoWordHintLbl": "HINT",
+        "commonWordClueLbl": "CLUE:",
+        "hiddenWordClueLbl": "CLUE:",
+        "wordComboClueLbl": "CLUE:",
+        "oppositeWordQuestionLbl": "CLUE:",
+        "mysteryWordClueLbl": "CLUE:",
+        "missingWordClueLbl": "CLUE:"
+    }
+}

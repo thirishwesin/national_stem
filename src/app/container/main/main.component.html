@@ -1,0 +1,23 @@
+
+<div class="main-background" [style.background]="'url(' + Images.MAIN_BACKGROUND + ')'">
+    <div class="top-wapper">
+        <app-main-title [currentRound]="currentRound" [currentQuestion]="currentQuestion"></app-main-title>
+    </div>
+    <div class="body-wapper row">
+        <div class="col-3 left-wapper">
+            <app-apng-timer [timeOut]="timeOut" [startTimer]="isStartTimer" [isResetAudio]="isResetAudio" [classNames]="{wrapper: ['loading-wapper'], apng: ['timer'], timerWrapper:['timer-wapper']}"></app-apng-timer>
+        </div>
+        <div class="col-9 loading-wapper" *ngIf="isResettingLayoutPosition">
+            <div class="loading-2 mart-basefive72">
+                <div id="load-1"></div>
+                <div id="load-2"></div>
+                <div id="load-3"></div>
+                <div id="load-4"></div>
+            </div>
+            <p class="loading-text">Resetting Layout...</p>
+        </div>
+        <div class="col-9 draggable-boundary" *ngIf="!isResettingLayoutPosition" [ngSwitch]="currentRound?.gameLogicName">
+            <app-scramble-word-logic [currentControl]="control" [currentQuestion]="currentQuestion" *ngSwitchCase="gameLogicConstant.SCRAMBLE_WORD"></app-scramble-word-logic>
+        </div>
+    </div>
+</div>

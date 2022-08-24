@@ -1,0 +1,116 @@
+<div class="container-fluid control">
+    <div class="button">
+        <button class="btn button-common btn-go-back-home" (click)="goBackHome(modalConstant.QUESTIONS.EXIST ,modalConstant.ACTION.QUIT)">Go Back Home</button>
+        <button class="btn connect-button" [ngClass]="webSocketService.isConnected ? 'connected-button' : 'connect-button'" (click)="toggleConnectingWebScoket()">{{webSocketService.isConnected ? 'Disconnect' : 'Connect'}}</button>
+        <div class="setting-link">
+          <button class="btn setting-icon" (click)="openFontSettingModal()">
+            <img [src]=Images.SETTING_ICON>
+          </button>
+          <button class="btn link-icon" (click)="openEditWebSocketLink(editURLModal)">
+            <img [src]=Images.LINK_ICON>
+          </button>
+        </div>
+    </div>
+
+    <div class="title">
+        <p class="episode-title">
+            EPISODE "{{ currentEpisodeId }}" <i class="fas fa-caret-down"></i>
+        </p>
+    </div>
+
+    <div class="openall-wrapper">
+        <div class="openall-group">
+            <div (click)="openAll()">Open All</div>
+            <div (click)="openNewScreen(screenConstant.MAIN)">Main</div>
+            <div (click)="openNewScreen(screenConstant.ONE_THIRD)">1/3 Screen</div>
+            <div *ngFor="let player of Game_Players" (click)="openNewScreen(screenConstant.PLAYER, player.id)" [id]="'player'+ player.id">{{player.name}}<span class="circle"></span></div>
+            <div class="resize-icon" (click)="toggleFullScreen()">
+                <img [src]="Images.MIN_ICON" class="width33" *ngIf="currentWindow.isFullScreen()" />
+                <img [src]="Images.MAX_ICON" class="width33" *ngIf="!currentWindow.isFullScreen()" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid row control-body">
+    <div class="container-fluid col-sm-12 row">
+        <div class="col-sm-6 row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle>
+                            <p class="section-text">{{ 'Round ' + currentRound.roundId }}</p>
+                            <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image"/>
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                            <button id="time_out" ngbDropdownItem *ngFor="let round of currentEpisode.rounds" (click)="chooseRound(round)"> {{ 'Round ' + round.roundId }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <input class="common-input" name="words" readonly="" [value]="gameLogicName" />
+            </div>
+            <div class="col-sm-2">
+                <button class="btn adjust-min" (click)="previousRound()">&lt;</button>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn adjust-min" (click)="nextRound()">&gt;</button>
+            </div>
+        </div>
+        <div class="col-sm-12" [ngSwitch]="currentRound.gameLogicName">
+            <app-scramble-word-control [currentControl]="currentControl" [currentRound]="currentRound" *ngSwitchCase="gameLogicConstant.SCRAMBLE_WORD"></app-scramble-word-control>
+        </div>
+    </div>
+
+    <div class="col-sm-12 mart-basefive6">
+        <div class="row">
+            <div class="col-sm-4 padr-basefive15 padl-basefive15" *ngFor="let player of Game_Players">
+                <div>
+                    <label class="player-lbl">Player {{player.id}}</label>
+                </div>
+                <div class="player-mark-wapper">
+                    <button type="button" class="btn common-button player-min-plus-btn" (click)="decreasePoint(player.id)">-</button>
+                    <div class="parallelogram-green">
+                        <label class="control-player-point">{{player.point}}</label>
+                    </div>
+                    <button type=" button" class="btn common-button player-min-plus-btn" (click)="increasePoint(player.id)">+</button>
+
+                </div>
+                <div>
+                    <button class="btn common-button" (click)="changePlayerBgImage(player)">{{player?.isChangePlayerBgImage ? 'Hide Player '+player.id+' Background Image' : 'Show Player '+player.id+' Background Image'}}</button>
+                </div>
+            </div>
+
+            <div class="col-sm-12 mart-basefive3 padr-basefive15 padl-basefive15">
+                <button class="btn common-button" (click)="togglePlayerPoint()">{{isHidePlayerPoint ? 'Hide Players Point':'Show Players Point'}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #editURLModal let-modal>
+    <div class="font-setting-bg">
+        <div class='modal-header'>
+            <h4 class="modal-title " id=" modal-basic-title ">"Websocket URL" Setting</h4>
+            <button type=" button " class=" close " aria-label=" Close " (click)=" modal.dismiss( 'Cross click' ) ">
+                <span aria-hidden=" true ">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-3">
+                <label for="" class="common-label mart-basefive2">Websocket URL</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control common-input" [(ngModel)]="websocketURL">
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type=" button " class="btn btn-add" (click)="modal.close()">Cancel</button>
+            <button type=" button " class="btn btn-add" (click)="editWebsocketURL()">Apply</button>
+
+            <button type=" button " class='btn btn-add' (click)="modal.close()"> OK</button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,43 @@
+:root {
+    --player-mark-font-size: 200px;
+    --player-welcome-font-size: 100px;
+}
+
+.player-body-wapper{
+    background: url("../../../assets/images/player_screen_bg.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+}
+.player-mark-body{
+    background: url("../../../assets/images/player_mark_screen_bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+    display: flex;
+}
+
+.player-mark {
+    font-size: var(--player-mark-font-size);
+    color: #fff;
+    margin: auto;
+    width: max-content;
+}
+.player-welcome{
+    width: 1000px;
+    margin: auto
+}
+.player-welcome p{
+    font-size: var(--player-welcome-font-size);
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 15px #41faff, 1px 1px 15px #41faff, 1px 1px 15px #41faff;
+    margin: auto;
+    text-align: center;
+}

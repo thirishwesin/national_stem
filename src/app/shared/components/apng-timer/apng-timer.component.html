@@ -1,0 +1,20 @@
+<!-- <div class="timer-wapper">
+    <img [src]="Images.TIMER" class="roundtwo_box" alt="">
+</div> -->
+
+
+<!-- Loading state -->
+<div class="loading-wapper" id="loadingWrapper" [hidden]="isFinishReadingApngData">
+    <div class="loading-2" id="timerLoading">
+        <div id="load-1"></div>
+        <div id="load-2"></div>
+        <div id="load-3"></div>
+        <div id="load-4"></div>
+    </div>
+    <p class="loading-text">Loading...</p>
+</div>
+
+<!-- Render state -->
+<div class="timer-wapper" id="timerWrapper">
+    <div class="d-block timer" id="timerAPNG"></div>
+</div>

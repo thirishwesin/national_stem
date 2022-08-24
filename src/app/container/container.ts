@@ -1,0 +1,6 @@
+export { AdminComponent } from './admin/admin.component'
+export { ControlComponent } from './control/control.component'
+export { HomeComponent } from './home/home.component'
+export { MainComponent } from './main/main.component'
+export { OneThirdScreenComponent } from './one-third-screen/one-third-screen.component'
+export { PlayerComponent } from './player/player.component'

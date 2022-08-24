@@ -1,0 +1,17 @@
+<div class="black-bg">
+    <p style="display: none;" #imagePath>{{ Images.ONE_THIRD_BACKGROUND }}</p>
+    <div class="one-third-background" [style.background]="'url(' + imagePath.innerText  + ')'">
+        <div [ngClass]="'one-third-wapper row'">
+            <div [ngClass]="'col-sm-3 left-wapper1'">
+                <app-apng-timer [timeOut]="timeOut" [startTimer]="isStartTimer" [isResetAudio]="isResetAudio"
+                    [classNames]="{wrapper: ['loading-wapper-onethird'], apng: ['timer-onethird'], timerWrapper:['timer-wapper2'], timerLoading: ['mart-basefive20']}">
+                </app-apng-timer>
+            </div>
+
+            <div class='col-sm-9' [ngSwitch]="currentRound?.gameLogicName">
+                <app-scramble-word-logic-onethird [currentControl]="control" [currentQuestion]="currentQuestion"
+                    *ngSwitchCase="gameLogicConstant.SCRAMBLE_WORD"></app-scramble-word-logic-onethird>
+            </div>
+        </div>
+    </div>
+</div>

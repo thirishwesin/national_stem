@@ -1,0 +1,13 @@
+<div class="scramble-word-body">
+    <div class="scramble-word-container" *ngIf="currentControl?.isShowQuestion && !currentControl?.isShowAnswer">
+        <div class="scramble-q-block blue-block" [ngClass]="{'animated heartBeat': currentControl?.isShowQuestion}" *ngFor="let char of currentQuestion?.question.split(''); let i=index;">
+            <div [ngClass]="{'animated zoomIn':  currentControl?.isShowAnswer}">{{char}}</div>
+        </div>
+    </div>
+    
+    <div class="scramble-word-container" *ngIf="currentControl?.isShowQuestion && currentControl?.isShowAnswer">
+        <div class="scramble-a-block green-block" *ngFor="let char of currentQuestion?.answer.split(''); let i=index;">
+            <div [ngClass]="{'animated zoomIn':  currentControl?.isShowAnswer}">{{char}}</div>
+        </div>
+    </div>
+</div>

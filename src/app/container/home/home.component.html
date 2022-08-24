@@ -1,0 +1,53 @@
+<div class="container-fluid home">
+    <div class="button">
+        <button class="btn button-common" [style.background]="isUserView ? '#48b822' : ''" (click)="clickUserOrAdmin(true)">User View</button>
+        <button class="btn button-common" [style.background]="!isUserView ? '#48b822' : ''" (click)="clickUserOrAdmin(false)">Admin View</button>
+        <button class="btn button-common" (click)="clickTestingComponent()" *ngIf="!env.production">Testing Component</button>
+        <button class="btn button-close" (click)="openModal(modalConstant.QUESTIONS.EXIST, modalConstant.ACTION.QUIT)">X</button>
+    </div>
+
+    <!-- user view section -->
+    <section *ngIf="isUserView">
+        <div class="container-fluid episode">
+            <div class="row marl-basefive12 marr-basefive12">
+                <div class="col-sm-3" *ngFor="let episode of episodes; let index = index">
+                    <div class="episode-body" (click)="clickEpisode(episode.episodeId)">
+                        <img [src]="Images.EPISODE" class="mx-auto d-block episode-image" />
+                        <p class="episode-text">
+                            <button class="btn episode-btn">EPISODE "{{index+1}}"</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of user view section -->
+
+    <!-- Admin View Section -->
+    <section *ngIf="!isUserView">
+        <div class="container-fluid episode">
+            <div class="row marl-basefive12 marr-basefive12">
+                <div class="col-sm-3" *ngFor="let episode of episodes; let index = index">
+                    <div class="episode-body">
+                        <img [src]="Images.MINUS" class="mx-auto d-block minus-image" (click)="openModal(
+                modalConstant.QUESTIONS.REMOVE_EPISODE.replace('{episodeId}', index+1+''),
+                modalConstant.ACTION.REMOVE,
+                episode.episodeId)" />
+                        <div (click)="clickEpisode(episode.episodeId)">
+                            <img [src]="Images.EPISODE" class="mx-auto d-block episode-image" />
+                            <p class="episode-text">
+                                <button class="btn episode-btn">EPISODE "{{index + 1}}"</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 add-body">
+                    <button (click)="openModal(modalConstant.QUESTIONS.ADD_EPISODE, modalConstant.ACTION.ADD)" class="add-btn">
+                        <fa-icon class="add-icon" [icon]="faPlusCircle"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Admin View Section -->
+</div>

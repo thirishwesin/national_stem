@@ -1,0 +1,102 @@
+<a class="btn main-btn" (click)="routeToHome()"> Go Back Home </a>
+
+<span class="title">EPISODE "{{ episodeId }}"</span>
+
+<div class=" container-fluid mart-basetwo25">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group form-field-center">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle>
+                        <p class="section-text">{{ 'Round ' + currentRound.roundId }}</p>
+                        <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image">
+                    </button>
+                            <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                                <button id="time_out" ngbDropdownItem *ngFor="let round of episode.rounds" (click)="chooseRound(round)">
+                                    {{ 'Round ' + round.roundId }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-field-center">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle>
+                        <p class="section-text">{{ gameLogicName }}</p>
+                        <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image">
+                    </button>
+                            <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                                <button id="time_out" ngbDropdownItem *ngFor="let gameLogic of gameLogicList" (click)="chooseGameLogic(gameLogic.name)">
+                                    {{ gameLogic.name }}
+                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <div class="form-group form-field-center">
+                <label for="_point" class="common-label">Point</label>
+                <input id="_point" type="text" class="common-input w-321" NumbersOnly [(ngModel)]="currentRound.firstPoint" />
+            </div>
+            <!-- Second Point -->
+            <div class="form-group form-field-center">
+                <label for="second_point" class="common-label">Second Point</label>
+                <input id="second_point" type="text" class="common-input w-321" NumbersOnly [(ngModel)]="currentRound.secondPoint" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-field-center">
+                <label for="time_out" class="common-label">Timeout</label>
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle>
+                <p class="section-text">{{ currentRound.firstTimeout }}</p>
+                <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image">
+              </button>
+                    <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                        <button id="time_out" ngbDropdownItem *ngFor="let timeout of timeoutArr" (click)="currentRound.firstTimeout = timeout">
+                      {{ timeout }}
+                </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-field-center">
+                <label for="time_out" class="common-label">Second Timeout</label>
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn common-input" id="time_out_choose_drop_down2" ngbDropdownToggle>
+                <p class="section-text" >{{ currentRound.secondTimeout }}</p>
+                <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image">
+              </button>
+                    <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down2">
+                        <button id="time_out" ngbDropdownItem *ngFor="let timeout of timeoutArr" (click)="currentRound.secondTimeout = timeout">
+                    {{ timeout }}
+                </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+<div [ngSwitch]="gameLogicName">
+    <app-scramble-word-admin *ngSwitchCase="gameLogicConstant.SCRAMBLE_WORD"></app-scramble-word-admin>
+</div>
+
+<div class="container-fluid padb-basetwo25">
+    <div [hidden]="currentRound.questions.length == 0">
+        <div class="second-body text-right none-bg pad-basetwo0 padt-basetwo10">
+            <app-question-list [round]="currentRound" [episodeId]="episodeId"></app-question-list>
+        </div>
+    </div>
+</div>

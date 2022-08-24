@@ -1,0 +1,47 @@
+:root {
+  --scramble-q-block-font-size: 90px;
+  --scramble-a-block-font-size: 90px;
+  }
+
+  .scramble-word-body {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .scramble-word-container {
+    width: max-content;
+  }
+
+  .scramble-q-block {
+    text-align: center;
+    color: #fff;
+    font-size: var(--scramble-q-block-font-size);
+    height: calc(var(--scramble-q-block-font-size) * 1.5);
+    width: calc(var(--scramble-q-block-font-size) * 1.5);
+    margin-right: var(--block-margin-right-onethird);
+    padding-top: calc(var(--scramble-q-block-font-size) * 0.05);
+    background-size: 100% 100%;
+    float: left;
+  }
+
+  .scramble-q-block:last-child{
+    margin-right: 0px;
+  }
+
+  .scramble-a-block {
+    text-align: center;
+    color: #fff;
+    font-size: var(--scramble-a-block-font-size);
+    height: calc(var(--scramble-a-block-font-size) * 1.5);
+    width: calc(var(--scramble-a-block-font-size) * 1.5);
+    margin-right: var(--block-margin-right-onethird);
+    padding-top: calc(var(--scramble-a-block-font-size) * 0.05);
+    background-size: 100% 100%;
+    float: left;
+  }
+
+  .scramble-a-block:last-child{
+    margin-right: 0px;
+  }

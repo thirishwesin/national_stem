@@ -1,0 +1,28 @@
+<div class="main-background" [style.background]="'url(' + Images.PLAYER_SCREEN_BACKGROUND+ ')'">
+    <div>
+        <div class="body-wapper">
+            <div *ngFor="let char of scrambleWord?.question.split(''); let i=index;">
+                <div class="scramble-q-block border-bottom-blue">
+                    <p>{{char}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="body-wapper">
+            <div class="scramble-a-block blue-block">
+                {{scrambleWordAnswer.word1}}
+            </div>
+    
+            <div class="scramble-a-block blue-block">
+                {{scrambleWordAnswer.word2}}
+            </div>
+    
+            <div class="scramble-a-block blue-block">
+                {{scrambleWordAnswer.word3}}
+            </div>
+    
+            <div class="scramble-a-block blue-block" [hidden]="scrambleWord.question.length == 3">
+                {{scrambleWordAnswer.word4}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,286 @@
+<div class="contaier-fluid row">
+    <div class="col-sm-6">
+        <div class="row mart-basefive3 width-100">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle>
+                    <p class="section-text">{{ currentQuestion.question }}</p>
+                    <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image">
+                  </button>
+                        <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                            <button id="time_out" ngbDropdownItem *ngFor="let question of questions" (click)="chooseQuestion(question)"> {{ question.question}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <button class="btn adjust-min" (click)="previousQuestion()"> &lt; </button>
+            </div>
+
+            <div class="col-sm-2">
+                <button class="btn adjust-min" (click)="nextQuestion()"> &gt; </button>
+            </div>
+        </div>
+
+        <div class="row width-100">
+
+            <div class="form-group col-sm-6">
+                <label class="common-label">Answer</label>
+                <input type="text" readonly class="common-input" [(ngModel)]="currentQuestion.answer">
+            </div>
+
+            <div class="form-group col-sm-6 padt-basetwo13">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn common-input" id="time_out_choose_drop_down" ngbDropdownToggle [disabled]="!currentControl.isShowQuestion || !webSocketService.isConnected">
+                    <p class="section-text">
+                      {{playerId ? 'Player' + playerId : 'Select Player'}}
+                    </p>
+                    <img [src]="Images.DROPDOWN" class="drop-down-icon" alt="drop down image"/>
+                </button>
+                    <div ngbDropdownMenu aria-labelledby="time_out_choose_drop_down">
+                        <button id="time_out" ngbDropdownItem *ngFor="let player of Game_Players" (click)="selectPlayer(player.id)">
+                          {{player.name}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row width-100">
+            <div class="form-group col-sm-3">
+                <button class="btn common-button" [disabled]="currentControl.isStartTimer" (click)="showQuestion()">{{currentControl.isShowQuestion ? 'Hide Question' : 'Show Question'}}</button>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <button class="btn common-button" [disabled]="!currentControl.isShowQuestion" (click)="correctAnswer()">Correct Answer</button>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <button class="btn common-button" [disabled]="!currentControl.isShowQuestion" (click)="wrongAnswer()">Wrong Answer</button>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <button class="btn common-button" [disabled]="!currentControl.isShowQuestion" (click)="showAnswer()">{{currentControl.isShowAnswer ? 'Hide Answer' : 'Show Answer'}}</button>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <button class="btn common-button" [disabled]="!currentControl.isShowQuestion || !playerId || !webSocketService.isConnected || currentControl.isStartTimer" (click)="showQuestionInTablet()">{{currentControl.isShowQuestionInTablet ? 'Hide Question In Tablet' : 'Show Question In Tablet'}}</button>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <button class="btn common-button" [disabled]="!currentControl.isShowQuestion || !currentControl.isShowQuestionInTablet || currentControl.isStartTimer || !webSocketService.isConnected" (click)="toggleLockTablet()">{{externalDeviceQuestion.isLock ? 'Unlock Tablet' : 'Lock Tablet'}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 timer-point-wapper">
+        <div class="row width-100">
+            <div class="col-sm-4 padt-basefive2">
+                <app-simple-timer [timeOut]="currentControl.timeOut" [startTimer]="currentControl.isStartTimer" [isResetAudio]="currentControl.isResetAudio"></app-simple-timer>
+            </div>
+
+            <div class="col-sm-4 timer-btn-gp">
+                <div class="form-group">
+                    <button class="btn common-button" [disabled]="!currentControl.isShowQuestion" (click)="startTimer()">{{ currentControl.isStartTimer ? 'Stop Timer' : 'Start Timer'}}</button>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn common-button" [disabled]="currentControl.isStartTimer" (click)="resetTimer(currentRound.firstTimeout, currentRound.firstPoint)">Reset Timer {{currentRound.firstTimeout}}</button>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn common-button" [disabled]="currentControl.isStartTimer" (click)="resetTimer(currentRound.secondTimeout, currentRound.secondPoint)">Reset Timer {{currentRound.secondTimeout}}</button>
+                </div>
+            </div>
+
+            <div class="col-sm-4 padt-basefive2">
+                <div class="point-wapper">
+                    <img [src]="Images.POINT_BG" alt="">
+                    <div class="point-text-wapper">
+                        <p> {{currentPoint}} </p>
+                        <p>Points</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #fontSettingModal let-modal>
+    <div class="font-setting-bg">
+        <div class='modal-header'>
+            <h4 class="modal-title " id=" modal-basic-title ">" {{currentRound.gameLogicName}} " UI Setting</h4>
+            <button type=" button " class=" close " aria-label=" Close " (click)=" modal.dismiss( 'Cross click' ) ">
+          <span aria-hidden=" true ">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <!-- Main Font Setting -->
+            <div class="font-setting-body">
+                <div class="row">
+                    <div class="col-sm-12 font-setting-title">
+                        <h1>Main Font Setting</h1>
+                    </div>
+                </div>
+                <div class="row dialog-input-field">
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Title</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true"  [(ngModel)]="currentQuestion.ui.font.roundName">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Question</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">{{'Recommended -' | recommandFontSize: gameLogicConstant.SCRAMBLE_WORD : 'main' : 'question' : currentQuestion.question.length}}</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.questionMain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Answer</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">{{'Recommended -' | recommandFontSize: gameLogicConstant.SCRAMBLE_WORD : 'main' : 'answer' : currentQuestion.answer.length}}</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.answerMain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- One Third Font Setting -->
+            <div class="font-setting-body mart-basefive5">
+                <div class="row">
+                    <div class="col-sm-12 font-setting-title">
+                        <h1>One Third Font Setting</h1>
+                    </div>
+                </div>
+                <div class="row dialog-input-field">
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Question</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">{{'Recommended -' | recommandFontSize: gameLogicConstant.SCRAMBLE_WORD : 'oneThird' : 'question' : currentQuestion.question.length}}</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.questionOneThird">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Answer</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">{{'Recommended -' | recommandFontSize: gameLogicConstant.SCRAMBLE_WORD : 'oneThird' : 'answer' : currentQuestion.answer.length}}</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.answerOneThird">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plyer Font Setting -->
+            <div class="font-setting-body mart-basefive5">
+                <div class="row">
+                    <div class="col-sm-12 font-setting-title">
+                        <h1>Player Font Setting</h1>
+                    </div>
+                </div>
+                <div class="row dialog-input-field">
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Point</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.playerPoint">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Question</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.playerQuestion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Answer</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.playerAnswer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Device Font Setting -->
+            <div class="font-setting-body mart-basefive5">
+                <div class="row">
+                    <div class="col-sm-12 font-setting-title">
+                        <h1>External Device Font Setting</h1>
+                    </div>
+                </div>
+                <div class="row dialog-input-field">
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Question</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.tabletQuestion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group col-md-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label for="" class="common-label mart-basetwo16">Answer</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="fontsize-limit">Recommended - 0</h6>
+                                <input class="form-control common-input" NumbersOnly="true" [(ngModel)]="currentQuestion.ui.font.tabletAnswer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type=" button " class="btn btn-add" (click)="modal.close()">Cancel</button>
+            <button type=" button " class="btn btn-add" (click)="applyFontSetting()">Apply</button>
+            <button type=" button " class='btn btn-add' (click)="modal.close()"> OK</button>
+        </div>
+    </div>
+</ng-template>

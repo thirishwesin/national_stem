@@ -1,0 +1,112 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+
+            <div class="form-group form-field-center">
+                <label for="round_name_font_size" class="common-label">Round And Round Name Font Size</label>
+                <input id="round_name_font_size" name="roundName" type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.roundName" />
+            </div>
+            <div class="form-group form-field-center">
+                <label class="common-label">Player Point Font Size</label>
+                <input type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.playerPoint" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-field-center">
+                <label class="common-label">Clue Label Font Size</label>
+                <input type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.clueLabel" />
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+<div class="container-fluid mart-basefive5" [formGroup]="scrambleWordForm">
+    <div class="second-body">
+        <div class="row">
+            <div class="col-sm-6 padl-basefive5 padr-basefive5 rightborder-white1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="question" class="common-label"> Question </label>
+                            <span class="text-danger" *ngIf="scrambleWordForm.controls['question'].hasError('required') &&
+                                (scrambleWordForm.controls['question'].dirty ||
+                                scrambleWordForm.controls['question'].touched)">
+                                * This field is required
+                            </span>
+                            <textarea id="question" type="text" Uppercase class="common-input common-textarea question-textarea" formControlName="question" [(ngModel)]="scrambleWord.question"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="main_quest_font_size" class="common-label">Main Question Font Size </label>
+                            <input id="main_quest_font_size" type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.questionMain" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="one_third_quest_font_size" class="common-label">1/3 Question Font Size </label>
+                        <input id="one_third_quest_font_size" type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.questionOneThird" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="player_quest_font_size" class="common-label">Player Question Font Size </label>
+                            <input type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.playerQuestion" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="tablet_quest_font_size" class="common-label">Talet Question Font Size </label>
+                            <input type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.tabletQuestion" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 padl-basefive5 padr-basefive5">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="ans" class="common-label">Answer</label>
+                            <span class="text-danger" *ngIf="scrambleWordForm.controls['answer'].hasError('required') &&
+                                (scrambleWordForm.controls['answer'].dirty ||
+                                    scrambleWordForm.controls['answer'].touched)">
+                                * This field is required
+                            </span>
+                            <textarea type="text" id="ans" Uppercase class="common-input common-textarea question-textarea" [(ngModel)]="scrambleWord.answer" formControlName="answer"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="main_ans_font_size" class="common-label">Main Answer Font Size</label>
+                            <input type="text" id="main_ans_font_size" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.answerMain" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="one_third_ans_font_size" class="common-label">1/3 Answer Font Size</label>
+                            <input type="text" id="one_third_ans_font_size" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.answerOneThird" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="player_ans_font_size" class="common-label">Player Answer Font Size </label>
+                            <input id="player_ans_font_size" type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.playerAnswer" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="tablet_ans_font_size" class="common-label">Tablet Answer Font Size </label>
+                            <input id="tablet_ans_font_size" type="text" class="common-input" NumbersOnly [(ngModel)]="scrambleWord.ui.font.tabletAnswer" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="second-body text-right none-bg pad-basetwo5 padt-basetwo10">
+        <button class="common-button common-btn-admin" (click)="addOrUpdateQuestion()">
+      {{scrambleWord.questionId == 0 ? 'Add' : 'Update'}}
+    </button>
+    </div>
+</div>

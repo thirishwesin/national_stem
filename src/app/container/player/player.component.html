@@ -1,0 +1,16 @@
+<div *ngIf="!currentControl?.isShowQuestionInTablet  || !(sendFromPlayerId == playerId && (currentRound.gameLogicName == gameLogicConstant.SCRAMBLE_WORD))">
+    <div class="player-body-wapper">
+        <div class="player-mark-body" *ngIf="player?.isChangePlayerBgImage">
+
+            <p *ngIf="isHidePlayerPoint" class="player-mark">{{player.point}}</p>
+
+            <div class="player-welcome" style="display: none">
+                <p>Player Welcome</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="currentControl?.isShowQuestionInTablet && sendFromPlayerId == playerId && currentRound.gameLogicName == gameLogicConstant.SCRAMBLE_WORD">
+    <app-scramble-word [scrambleWord]="currentQuestion" [scrambleWordAnswer]="scrambleWord"></app-scramble-word>
+</div>

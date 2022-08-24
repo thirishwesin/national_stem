@@ -1,0 +1,33 @@
+<div class="table-body" *ngIf="tableColumns.length > 0">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="table-title text-center" *ngFor="let column of tableColumns">
+                    {{ column }}
+                </th>
+                <th class="table-title act-width text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of tableDatas">
+                <ng-container>
+                    <td class="common-data text-center" *ngFor="let _data of question | keyvalue : valueAscOrder; let i = index">
+                        <span>
+                            {{ _data.value }}
+                        </span>
+                    </td>
+                </ng-container>
+                <td class="text-center">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">
+                        <button class="btn-primary btn-table button" (click)="onClickEdit(question.questionId)">
+                            Edit
+                        </button>
+                        <button class="btn-primary btn-table button" (click)="onClickDelete(question.questionId)">
+                            Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

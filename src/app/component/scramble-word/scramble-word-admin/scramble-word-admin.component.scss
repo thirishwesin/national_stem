@@ -1,0 +1,28 @@
+.dropdown {  
+  width: 321px;
+  .dropdown-toggle {
+      width: 321px;
+      text-align: left;
+  }
+}
+
+.btn-table {
+  width: 90px;
+  border-top-right-radius: 17px !important;
+  border-bottom-left-radius: 17px !important;
+  background: repeating-linear-gradient(152deg, #f9f906bf, #41faffcc);
+  border: none;
+  height: 30px;
+  padding: 3px;
+  outline: none;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: 1px solid #4DB821;
+  margin-right: 10px;
+  color: #013ad6;
+}
+
+.btn-group {
+  text-align: right;
+}

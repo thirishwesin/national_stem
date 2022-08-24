@@ -1,0 +1,76 @@
+.table-body{
+    border-top-left-radius: 10px;
+    border: 2px solid #4DB821;
+    padding: 0;
+    border-bottom: none;
+    border-top-right-radius: 10px;
+}
+
+.table-body .table {
+    margin-bottom: 0;
+}
+
+.table-body .table thead tr,
+.table-body .table tbody tr  {
+    border-bottom: 2px solid #4DB821;
+}
+
+.table-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #41faff;
+    letter-spacing: 0.7px;
+    margin-bottom: 0px;
+    text-align: left;
+    padding-bottom: 5px;
+    width: auto;
+}
+
+.table-body .table thead tr th ,
+.table-body .table thead tr td {
+    border: none;
+    padding: 10px 10px !important;
+}
+
+.table-body .table tbody tr td {
+    border: none;
+    padding: 5px 10px !important;
+    vertical-align: middle;
+}
+
+.table-body .table tbody tr .common-data {
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px !important;
+}
+
+.table-body .table tbody tr td:last-child{
+    width: 150px;
+}
+
+.btn-table {
+    width: 90px;
+    border-top-right-radius: 17px !important;
+    border-bottom-left-radius: 17px !important;
+    background: repeating-linear-gradient(152deg, #f9f906bf, #41faffcc);
+    border: none;
+    height: 30px;
+    padding: 3px;
+    outline: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: 1px solid #4DB821;
+    margin-right: 10px;
+    color: #013ad6;
+}
+
+.btn-group {
+    text-align: right;
+}
+
+.btn-table:focus,.btn-table:active,.btn-table:hover {
+    box-shadow:1px 4px #00000017 !important;
+    color:#212529 !important;
+}

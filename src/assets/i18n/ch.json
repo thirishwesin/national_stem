@@ -1,0 +1,37 @@
+{
+    "rounds": {
+        "round1": "第一回合",
+        "round2": "第二轮",
+        "round3": "第三轮",
+        "round4": "第四轮",
+        "round5": "第五轮"
+    },
+    "gameLogics": {
+        "": "选择字",
+        "SCRAMBLE WORD" : "乱码",
+        "TYPO WORD": "错字",
+        "HIDDEN WORD": "隐藏的词",
+        "CROSS WORD" : "填字游戏",
+        "WRONG WORD" : "错字",
+        "OPPOSITE WORD" : "反义词",
+        "VIDEO WORD" : "视频词",
+        "ODD WORD" : "奇怪的文字",
+        "MYSTERY WORD" : "神秘词",
+        "LADDER WORD" : "梯形字",
+        "COMMON WORD" : "常用词",
+        "MISSING WORD": "缺字",
+        "WORD COMBO": "单词组合"
+
+    },
+    "labels": {
+        "typoWordQuestionLbl": "回合",
+        "typoWordHintLbl": "回合",
+        "commonWordClueLbl": "回合:",
+        "hiddenWordClueLbl": "回合:",
+        "wordComboClueLbl": "回合:",
+        "oppositeWordQuestionLbl": "回合",
+        "mysteryWordClueLbl": "回合:",
+        "missingWordClueLbl": "回合:"
+    }
+  }
+  
